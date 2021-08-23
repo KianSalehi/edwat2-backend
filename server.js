@@ -7,10 +7,10 @@ let io = require('socket.io')(app, {
         credentials: true
     }
 });
-
+//Port listener
 app.listen(8082);
 console.log("server started.");
-
+//Connection made
 io.on('connection', (socket)=>{
     socket.emit('console_message', { status:'connected!'});
     socket.on('join_create_room',  (roomName)=>{
@@ -29,7 +29,7 @@ io.on('connection', (socket)=>{
         }
         socket.emit('SOCKET_newRoomAction', roomName)
     })
-
+//New message received by the server
     socket.on('NEW_MESSAGE', (payload)=>{
         console.log(payload);
         io.in(payload.roomID).emit('SOCKET_addNewMessage', {...payload})
