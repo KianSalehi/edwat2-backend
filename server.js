@@ -34,5 +34,16 @@ io.on('connection', (socket)=>{
         console.log(payload);
         io.in(payload.roomID).emit('SOCKET_addNewMessage', {...payload})
     });
-
+// New Video ID
+    socket.on('NEW_VIDEO', (data)=>{
+        io.in(data.roomID).emit('SOCKET_newVideoID', data.videoID)
+    });
+    // Play Video
+    socket.on('VIDEO_PLAYING', (data)=>{
+        io.to(data).emit('SOCKET_VIDEO_IS_PLAYING');
+    });
+    // Pause Video
+    socket.on('VIDEO_PAUSED', (data)=>{
+        io.to(data).emit('SOCKET_VIDEO_IS_PAUSED');
+    });
 })
