@@ -40,7 +40,7 @@ io.on('connection', (socket)=>{
     });
     // Play Video
     socket.on('VIDEO_PLAYING', (data)=>{
-        io.to(data).emit('SOCKET_VIDEO_IS_PLAYING');
+        io.to(data.roomID).emit('SOCKET_VIDEO_IS_PLAYING');
     });
     // Pause Video
     socket.on('VIDEO_PAUSED', (data)=>{
